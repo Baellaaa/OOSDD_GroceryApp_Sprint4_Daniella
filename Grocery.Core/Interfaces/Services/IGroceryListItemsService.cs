@@ -9,6 +9,8 @@ namespace Grocery.Core.Interfaces.Services
 
         public List<GroceryListItem> GetAllOnGroceryListId(int groceryListId);
 
+        public List<BestSellingProducts> GetBestSellingProducts(int topX = 5);
+
         public GroceryListItem Add(GroceryListItem item);
 
         public GroceryListItem? Delete(GroceryListItem item);
@@ -16,6 +18,5 @@ namespace Grocery.Core.Interfaces.Services
         public GroceryListItem? Get(int id);
 
         public GroceryListItem? Update(GroceryListItem item);
-        public List<BestSellingProducts> GetBestSellingProducts(int topX = 5);
     }
 }

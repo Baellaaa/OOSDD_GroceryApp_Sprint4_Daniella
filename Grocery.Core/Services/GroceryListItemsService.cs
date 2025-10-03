@@ -49,9 +49,42 @@ namespace Grocery.Core.Services
             return _groceriesRepository.Update(item);
         }
 
-        public List<BestSellingProducts> GetBestSellingProducts(int topX = 5) //DEZE UITWERKEN!!!
+        public List<BestSellingProducts> GetBestSellingProducts(int topX = 5)
         {
-            throw new NotImplementedException();
+            List<BestSellingProducts> bestSellingProductslist = new List<BestSellingProducts>();
+
+            var allGroceries = _groceriesRepository.GetAll().GroupBy(grocery => grocery.ProductId);
+            int amount;
+
+            foreach (var grocery in allGroceries)
+            {
+                if (bestSellingProductslist.Count > topX)
+                {
+                    break;
+                }
+
+                var firstGrocery = grocery.First();
+                amount = 0;
+                foreach (var value in grocery)
+                {
+                    amount += value.Amount;
+                }
+
+                bestSellingProductslist.Add(new BestSellingProducts(firstGrocery.ProductId,
+                    _productRepository.Get(firstGrocery.ProductId)!.Name,
+                    _productRepository.Get(firstGrocery.ProductId)!.Stock,
+                    amount,
+                    0));
+
+                bestSellingProductslist = bestSellingProductslist.OrderByDescending(grocery => grocery.NrOfSells).ToList();
+
+                foreach (var product in bestSellingProductslist)
+                {
+                    product.Ranking = bestSellingProductslist.IndexOf(product) + 1;
+                }
+            }
+
+            return bestSellingProductslist;
         }
 
         private void FillService(List<GroceryListItem> groceryListItems)

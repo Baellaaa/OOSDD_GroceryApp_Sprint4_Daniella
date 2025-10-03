@@ -8,6 +8,8 @@ namespace Grocery.Core.Interfaces.Repositories
 
         public List<GroceryListItem> GetAllOnGroceryListId(int id);
 
+        public List<BestSellingProducts> GetBestSellingProducts(int topX = 5);
+    
         public GroceryListItem Add(GroceryListItem item);
 
         public GroceryListItem? Delete(GroceryListItem item);
