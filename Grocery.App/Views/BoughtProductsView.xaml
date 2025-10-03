@@ -20,7 +20,7 @@
         SelectedItem="{Binding SelectedProduct, Mode=TwoWay}" 
         SelectedIndexChanged="Picker_SelectedIndexChanged"
         BackgroundColor="{StaticResource Primary}"
-            TextColor="{StaticResource Secondary}">
+        TextColor="{StaticResource Secondary}">
         </Picker>
         <Border Grid.Row="1" Grid.Column="0" Stroke="#C49B33" StrokeThickness="4" Padding="5" Margin="5" HorizontalOptions="Center">
             <CollectionView ItemsSource="{Binding BoughtProductsList}" Margin="5" HorizontalOptions="End" SelectionMode="Single">
@@ -28,13 +28,14 @@
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:BoughtProducts" >
+                    <DataTemplate x:DataType="m:BoughtProducts">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <!-- Toon hier de naam van de Client naam van de boodschappenlijst -->
+                            <Label Grid.Column="0" Text="{Binding Client.Name}" HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="{Binding GroceryList.Name}" HorizontalTextAlignment="Center" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -5,10 +5,20 @@ namespace Grocery.Core.Models
     {
         public string EmailAddress { get; set; }
         public string Password { get; set; }
-        public Client(int id, string name, string emailAddress, string password) : base(id, name)
+        
+        public enum Role
         {
-            EmailAddress=emailAddress;
-            Password=password;
+            None,
+            Admin
+        }
+
+        public Role UserRole{ get; set; }
+
+        public Client(int id, string name, string emailAddress, string password, Role userRole = Role.None) : base(id, name)
+        {
+            EmailAddress = emailAddress;
+            Password = password;
+            UserRole = userRole;
         }
     }
 }
